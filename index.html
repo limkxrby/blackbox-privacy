@@ -1,30 +1,44 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Blackbox Privacy Policy</title>
-<style>body{font-family:system-ui,sans-serif;max-width:40rem;margin:2rem auto;padding:0 1.25rem;line-height:1.55;color:#1a1916}</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Blackbox Privacy Policy</title>
+  <style>
+    :root { color-scheme: light; font-family: system-ui, sans-serif; color: #202520; background: #f6f7f2; }
+    body { max-width: 48rem; margin: 0 auto; padding: 2.5rem 1.25rem 4rem; line-height: 1.6; }
+    h1, h2 { line-height: 1.2; }
+    h1 { font-size: 2.1rem; margin-bottom: .35rem; }
+    h2 { font-size: 1.2rem; margin-top: 2rem; }
+    .date { color: #566159; margin-top: 0; }
+    .intro { font-size: 1.08rem; }
+    a { color: #205c47; }
+    li { margin: .45rem 0; }
+  </style>
 </head>
 <body>
-<h1>Blackbox Privacy Policy</h1>
-<p>Effective date: November 10, 2026</p>
-<p>This policy covers the Blackbox Chrome extension.</p>
-<h2>What Blackbox stores</h2>
-<ul>
-<li>Blackbox stores tab URLs, titles, and group names only on the device.</li>
-<li>The device key stays in chrome.storage.local.</li>
-<li>A passphrase backup is ciphertext and is not uploaded.</li>
-<li>There is no account, no analytics, and no server.</li>
-</ul>
-<h2>How the data is used</h2>
-<ul>
-<li>The data is used only for session restore.</li>
-<li>The data is not sold.</li>
-<li>The data is not used for advertising.</li>
-<li>The data is not transmitted off the device.</li>
-</ul>
-<h2>Contact</h2>
-<p>Questions about this policy: open an issue at <a href="https://github.com/limkxrby/blackbox-privacy/issues">github.com/limkxrby/blackbox-privacy/issues</a>.</p>
+  <main>
+    <h1>Blackbox Privacy Policy</h1>
+    <p class="date">Effective November 10, 2026</p>
+    <p class="intro">Blackbox is a Chrome extension that records supported web tabs on your device so you can restore a saved session after a crash or restart. It can also park idle tabs using Chrome's native tab-discard feature.</p>
+
+    <h2>Information Blackbox uses</h2>
+    <p>To record and restore a session, Blackbox reads and stores HTTP and HTTPS tab addresses and titles; tab order, pinned, active, discarded, and last-accessed state; window membership and focus; and tab-group names, colors, collapsed state, and membership. It also derives a broad tab category from the address. These details can reveal browsing activity.</p>
+    <p>Blackbox stores your idle-tab settings, seal names, times and tab/group/window counts, an optional passphrase hint, and an encrypted passphrase check. A keyed digest is used to avoid duplicate seals. The passphrase itself is not saved.</p>
+
+    <h2>Local storage and encryption</h2>
+    <p>Session contents are encrypted with AES-GCM in <code>chrome.storage.local</code>. The device key is also stored there, unencrypted, so Blackbox can restore without asking for a passphrase. Someone with access to your Chrome profile and its local extension data may be able to read the key and decrypt local seals. Seal names, times, counts, settings, and the optional hint remain readable in local storage.</p>
+    <p>You can download an optional <code>.bbx</code> backup encrypted with a passphrase. Backups created by this version contain only the format and key-derivation parameters, random salt and IV, and ciphertext; the session, hint, creation time, and counts are inside the ciphertext. New backups use PBKDF2-SHA-256 with 600,000 iterations and AES-GCM. Blackbox can still import older Blackbox backups with their original iteration count; older files may contain a readable hint and counts. Keep your passphrase and downloaded file safe; Blackbox cannot recover a lost passphrase.</p>
+
+    <h2>Use, sharing, and retention</h2>
+    <p>Blackbox uses this information only to record and restore sessions, park idle tabs, and operate the backup and settings features. It has no account, analytics, telemetry, advertising, or extension-initiated network requests. Blackbox does not upload session data or backup files, sell data, or share it with the developer or third parties. Restoring a web address causes Chrome to load that page in the usual way.</p>
+    <p>Blackbox keeps up to 20 recent seals and a separate recovery checkpoint on your device. You can remove the extension to remove its local extension storage. Downloaded backups remain wherever you saved them until you delete them.</p>
+
+    <h2>Limited Use</h2>
+    <p>Blackbox's use of information received through Chrome APIs follows the Chrome Web Store User Data Policy, including its Limited Use requirements. Browsing activity is used only for the user-facing session and tab features described above.</p>
+
+    <h2>Contact</h2>
+    <p>Questions about this policy: <a href="https://github.com/limkxrby/blackbox-privacy/issues">open an issue in the Blackbox privacy repository</a>.</p>
+  </main>
 </body>
 </html>
